@@ -1,0 +1,90 @@
+import pandas as pd
+import random
+
+# Generating educational statistics data
+subjects = ['Math', 'Science', 'History', 'English']
+grades = ['A', 'B', 'C', 'D', 'F']
+
+# Generating random data for students
+data = {
+    'Student_ID': [f'ST{i:03}' for i in range(1, 21)],
+    'Math': [random.choice(grades) for _ in range(20)],
+    'Science': [random.choice(grades) for _ in range(20)],
+    'History': [random.choice(grades) for _ in range(20)],
+    'English': [random.choice(grades) for _ in range(20)]
+}
+
+# Creating the DataFrame
+edu_stats_df = pd.DataFrame(data)
+
+# Displaying the DataFrame
+print(edu_stats_df)
+# Grouping the DataFrame by 'Math' grades and calculating the count for each grade
+math_grade_counts = edu_stats_df.groupby('Math').size()
+print(math_grade_counts)
+
+# Sort the DataFrame by 'English' grades in alphabetical order
+sorted_by_english = edu_stats_df.sort_values(by='English')
+print(sorted_by_english)
+# Sort the DataFrame by 'Math' grades in descending order and then by 'Science' grades in ascending order
+sorted_by_math_science = edu_stats_df.sort_values(by=['Math', 'Science'], ascending=[False, True])
+print(sorted_by_math_science)
+# Filtering students who scored 'A' in Math
+math_A_students = edu_stats_df[edu_stats_df['Math'] == 'A']
+print(math_A_students)
+# Filtering students who scored 'A' in Math and 'B' in Science
+math_A_science_B_students = edu_stats_df[(edu_stats_df['Math'] == 'A') & (edu_stats_df['Science'] == 'B')]
+print(math_A_science_B_students)
+# Filtering students who scored either 'A' in Math or 'B' in Science
+math_A_or_science_B_students = edu_stats_df[(edu_stats_df['Math'] == 'A') | (edu_stats_df['Science'] == 'B')]
+print(math_A_or_science_B_students)
+import pandas as pd
+import matplotlib.pyplot as plt
+import random
+
+# Generating educational statistics data
+subjects = ['Math', 'Science', 'History', 'English']
+grades = ['A', 'B', 'C', 'D', 'F']
+
+# Generating random data for students
+data = {
+    'Student_ID': [f'ST{i:03}' for i in range(1, 21)],
+    'Math': [random.choice(grades) for _ in range(20)],
+    'Science': [random.choice(grades) for _ in range(20)],
+    'History': [random.choice(grades) for _ in range(20)],
+    'English': [random.choice(grades) for _ in range(20)]
+}
+
+# Creating the DataFrame
+edu_stats_df = pd.DataFrame(data)
+
+# Creating subplots with line plots
+fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(12, 8))
+
+# Line plot for Math grades
+axs[0, 0].plot(edu_stats_df['Student_ID'], edu_stats_df['Math'], marker='o', color='red')
+axs[0, 0].set_title('Math Grades')
+axs[0, 0].set_xlabel('Student ID')
+axs[0, 0].set_ylabel('Grades')
+
+# Line plot for Science grades
+axs[0, 1].plot(edu_stats_df['Student_ID'], edu_stats_df['Science'], marker='o', color='blue')
+axs[0, 1].set_title('Science Grades')
+axs[0, 1].set_xlabel('Student ID')
+axs[0, 1].set_ylabel('Grades')
+
+# Line plot for History grades
+axs[1, 0].plot(edu_stats_df['Student_ID'], edu_stats_df['History'], marker='o', color='green')
+axs[1, 0].set_title('History Grades')
+axs[1, 0].set_xlabel('Student ID')
+axs[1, 0].set_ylabel('Grades')
+
+# Line plot for English grades
+axs[1, 1].plot(edu_stats_df['Student_ID'], edu_stats_df['English'], marker='o', color='orange')
+axs[1, 1].set_title('English Grades')
+axs[1, 1].set_xlabel('Student ID')
+axs[1, 1].set_ylabel('Grades')
+
+# Adjusting layout
+plt.tight_layout()
+plt.show()
